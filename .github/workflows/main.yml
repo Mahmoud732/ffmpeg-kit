@@ -58,7 +58,8 @@ jobs:
             libunistring-dev \
             libaom-dev \
             libdav1d-dev \
-            libglib2.0-dev
+            libglib2.0-dev \
+            libtasn1-dev
 
       # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
       - name: Set up JDK 17
