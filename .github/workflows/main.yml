@@ -33,7 +33,7 @@ jobs:
             libcurl4-gnutls-dev libdav1d-dev libdbus-1-dev libdecor-0-dev \
             libdrm-dev libegl-dev libexpat1-dev libffi-dev libfontconfig-dev \
             libfreetype6-dev libfribidi-dev libgbm-dev libgl-dev libgles-dev \
-            libglib2.0-dev libglx-dev libgmp-dev libgraphite2-dev \
+            libglib2.0-dev libglx-dev libgmp-dev libgnutls28-dev libgraphite2-dev \
             libharfbuzz-dev libibus-1.0-dev libice-dev libicu-dev libidn2-dev \
             libjpeg-dev libltdl-dev libmount-dev libmp3lame-dev libncurses-dev \
             nettle-dev libobjc-13-dev libogg-dev libopts25-dev libopus-dev \
@@ -86,7 +86,7 @@ jobs:
 
       # 7. Run the main build command.
       - name: Build Full FFmpeg-Kit for Android
-        run: ./android.sh --full
+        run: ./android.sh --full --disable-gnutls
 
       # 8. If the build fails, print the entire build log to the console.
       - name: Print build logs on failure
