@@ -23,8 +23,8 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. Install the complete list of system-level build dependencies.
-      #    This list is based on the official FFmpeg Trac wiki guide to ensure all
-      #    external libraries can be compiled successfully.
+      #    This list is based on the official FFmpeg Trac wiki guide and user feedback
+      #    to ensure all external libraries can be compiled successfully.
       - name: Install Build Dependencies
         run: |
           sudo apt-get update -qq && sudo apt-get -y install \
@@ -38,15 +38,34 @@ jobs:
             groff \
             gnulib \
             gtk-doc-tools \
+            libaom-dev \
             libass-dev \
+            libasound2-dev \
+            libdav1d-dev \
+            libexpat1-dev \
             libfreetype6-dev \
+            libfribidi-dev \
+            libgmp-dev \
             libgnutls28-dev \
+            libglib2.0-dev \
+            libjpeg-dev \
             libmp3lame-dev \
+            libogg-dev \
+            libopus-dev \
+            libpng-dev \
             libsdl2-dev \
+            libsoxr-dev \
+            libssl-dev \
+            libtasn1-6-dev \
+            libtheora-dev \
             libtool \
+            libunistring-dev \
             libva-dev \
             libvdpau-dev \
             libvorbis-dev \
+            libvpx-dev \
+            libwebp-dev \
+            libxml2-dev \
             libxcb1-dev \
             libxcb-shm0-dev \
             libxcb-xfixes0-dev \
@@ -57,10 +76,6 @@ jobs:
             wget \
             yasm \
             zlib1g-dev \
-            libunistring-dev \
-            libaom-dev \
-            libdav1d-dev \
-            libglib2.0-dev \
             libtasn1-dev
 
       # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
