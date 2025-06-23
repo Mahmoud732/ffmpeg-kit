@@ -75,8 +75,7 @@ jobs:
             texinfo \
             wget \
             yasm \
-            zlib1g-dev \
-            libtasn1-dev
+            zlib1g-dev
 
       # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
       - name: Set up JDK 17
@@ -90,8 +89,8 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # Specify the NDK version required by the build script
-          ndk-version: '25.2.9519653'
+          # NDK version is now specified as part of the packages list
+          packages: 'ndk;25.2.9519653'
 
       # 5. Cache Gradle files to speed up subsequent builds.
       - name: Cache Gradle packages
