@@ -89,6 +89,8 @@ jobs:
         run: |
           chmod +x android.sh
           ./android.sh \
+            --disable-x86 \
+            --disable-arm-v7a-neon \
             --enable-gpl \
             --enable-android-media-codec \
             --enable-android-zlib \
