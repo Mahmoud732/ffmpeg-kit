@@ -64,7 +64,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      # 4. Cache Gradle files to speed up subsequent builds.
+      # 4. Set up the Android SDK and NDK environment properly.
+      #    This action correctly sets ANDROID_HOME and ANDROID_NDK_ROOT.
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          # Specify the NDK version required by the build script
+          ndk-version: '25.2.9519653'
+
+      # 5. Cache Gradle files to speed up subsequent builds.
       - name: Cache Gradle packages
         uses: actions/cache@v4
         with:
@@ -75,29 +83,29 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # 5. Cache the downloaded source tarballs to avoid re-downloading them on every run.
+      # 6. Cache the downloaded source tarballs to avoid re-downloading them on every run.
       - name: Cache FFmpeg Source Dependencies
         uses: actions/cache@v4
         with:
           path: src # The 'src' directory where sources are downloaded
           key: ${{ runner.os }}-ffmpeg-sources-${{ hashFiles('**/tools/download-sources.sh') }}
 
-      # 6. Run the main build command. This is where your specific command goes.
+      # 7. Run the main build command.
       - name: Build Full FFmpeg-Kit for Android
-        env:
-          # Define environment variables required by the build script.
-          ANDROID_NDK_ROOT: ${{ env.ANDROID_HOME }}/ndk-bundle
         run: |
           echo "Starting FFmpeg-Kit build..."
+          echo "ANDROID_HOME: $ANDROID_HOME"
+          echo "ANDROID_NDK_ROOT: $ANDROID_NDK_ROOT"
           # Make the build script executable
           chmod +x android.sh
           # Execute the script with the --full flag
           ./android.sh --full
 
-      # 7. Upload the entire 'prebuilt/android-aar' directory as a single artifact.
+      # 8. Upload the entire 'prebuilt/android-aar' directory as a single artifact.
       #    This will contain all the generated AAR files for each architecture.
       - name: Upload AAR Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-kit-full-android-aars
           path: prebuilt/android-aar/
+
