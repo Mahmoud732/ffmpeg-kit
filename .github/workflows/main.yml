@@ -79,7 +79,6 @@ jobs:
             libidn2-dev \
             libjpeg-dev \
             libltdl-dev \
-
             libmount-dev \
             libmp3lame-dev \
             libncurses-dev \
@@ -96,7 +95,6 @@ jobs:
             libsamplerate0-dev \
             libsdl2-dev \
             libselinux1-dev \
-
             libsepol-dev \
             libsharpyuv-dev \
             libsm-dev \
@@ -129,7 +127,6 @@ jobs:
             libxi-dev \
             libxinerama-dev \
             libxkbcommon-dev \
-
             libxml2-dev \
             libxrandr-dev \
             libxrender-dev \
