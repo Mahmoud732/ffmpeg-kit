@@ -53,18 +53,30 @@ jobs:
             libogg-dev \
             libopus-dev \
             libpng-dev \
+            libpulse-dev \
             libsdl2-dev \
             libsoxr-dev \
             libssl-dev \
             libtasn1-6-dev \
             libtheora-dev \
             libtool \
+            libudev-dev \
             libunistring-dev \
             libva-dev \
             libvdpau-dev \
             libvorbis-dev \
             libvpx-dev \
+            libwayland-dev \
             libwebp-dev \
+            libx11-dev \
+            libxcursor-dev \
+            libxext-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxinerama-dev \
+            libxkbcommon-dev \
+            libxrandr-dev \
+            libxss-dev \
             libxml2-dev \
             libxcb1-dev \
             libxcb-shm0-dev \
