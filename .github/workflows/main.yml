@@ -1,0 +1,88 @@
+# .github/workflows/build-ffmpeg-kit.yml
+
+# Name for this GitHub Actions workflow.
+name: Build Full FFmpeg-Kit for Android
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push events to the "main" or "master" branch.
+  push:
+    branches: [ "main", "master" ]
+    
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    # The type of virtual machine that the job will run on.
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks out your repository code so the job can access it.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install the system-level build dependencies required by FFmpeg and its libraries.
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            autoconf \
+            automake \
+            build-essential \
+            cmake \
+            curl \
+            git \
+            libtool \
+            nasm \
+            pkg-config \
+            texinfo \
+            yasm
+
+      # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      # 4. Cache Gradle files to speed up subsequent builds.
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 5. Cache the downloaded source tarballs to avoid re-downloading them on every run.
+      - name: Cache FFmpeg Source Dependencies
+        uses: actions/cache@v4
+        with:
+          path: src # The 'src' directory where sources are downloaded
+          key: ${{ runner.os }}-ffmpeg-sources-${{ hashFiles('**/tools/download-sources.sh') }}
+
+      # 6. Run the main build command. This is where your specific command goes.
+      #    We also set the necessary Android environment variables.
+      - name: Build Full FFmpeg-Kit for Android
+        env:
+          # Define environment variables required by the build script.
+          # The Android SDK path will be set automatically by the setup-android action.
+          ANDROID_NDK_ROOT: ${{ env.ANDROID_HOME }}/ndk-bundle
+        run: |
+          echo "Starting FFmpeg-Kit build..."
+          # Make the build script executable
+          chmod +x android.sh
+          # Execute the script with the --full flag
+          ./android.sh --full
+
+      # 7. Upload the entire 'prebuilt/android-aar' directory as a single artifact.
+      #    This will contain all the generated AAR files for each architecture.
+      - name: Upload AAR Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-kit-full-android-aars
+          path: prebuilt/android-aar/
+
