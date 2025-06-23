@@ -23,44 +23,91 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. Install the complete list of system-level build dependencies.
-      #    This list is based on the official FFmpeg Trac wiki guide and user feedback
-      #    to ensure all external libraries can be compiled successfully.
+      #    This list is based on a successful local WSL environment to ensure
+      #    all external libraries can be compiled successfully.
       - name: Install Build Dependencies
         run: |
           sudo apt-get update -qq && sudo apt-get -y install \
+            asciidoc \
             autoconf \
             autogen \
             automake \
             build-essential \
             cmake \
-            git-core \
+            curl \
+            dblatex \
+            docbook-to-man \
+            docbook-utils \
+            docbook-xsl \
+            docbook2x \
+            doxygen \
             gettext \
+            git-core \
+            gperf \
             groff \
             gnulib \
             gtk-doc-tools \
+            intltool-debian \
             libaom-dev \
-            libass-dev \
             libasound2-dev \
+            libass-dev \
+            libbz2-dev \
+            libclang-common-18-dev \
+            libcurl4-gnutls-dev \
             libdav1d-dev \
+            libdbus-1-dev \
+            libdecor-0-dev \
+            libdrm-dev \
+            libegl-dev \
             libexpat1-dev \
+            libffi-dev \
+            libfontconfig-dev \
             libfreetype6-dev \
             libfribidi-dev \
+            libgbm-dev \
+            libgl-dev \
+            libgles-dev \
+            libglib2.0-dev \
+            libglx-dev \
             libgmp-dev \
             libgnutls28-dev \
-            libglib2.0-dev \
+            libgraphite2-dev \
+            libharfbuzz-dev \
+            libibus-1.0-dev \
+            libice-dev \
+            libicu-dev \
+            libidn2-dev \
             libjpeg-dev \
+            libltdl-dev \
+
+            libmount-dev \
             libmp3lame-dev \
+            libncurses-dev \
+            libobjc-13-dev \
             libogg-dev \
+            libopts25-dev \
             libopus-dev \
+            libp11-kit-dev \
+            libpciaccess-dev \
+            libpcre2-dev \
             libpng-dev \
+            libpthread-stubs0-dev \
             libpulse-dev \
+            libsamplerate0-dev \
             libsdl2-dev \
+            libselinux1-dev \
+
+            libsepol-dev \
+            libsharpyuv-dev \
+            libsm-dev \
+            libsndio-dev \
             libsoxr-dev \
             libssl-dev \
+            libstdc++-13-dev \
             libtasn1-6-dev \
-            libtheora-dev \
             libtool \
             libudev-dev \
+            libunibreak-dev \
             libunistring-dev \
             libva-dev \
             libvdpau-dev \
@@ -69,24 +116,41 @@ jobs:
             libwayland-dev \
             libwebp-dev \
             libx11-dev \
+            libxau-dev \
+            libxcb-render0-dev \
+            libxcb-shape0-dev \
+            libxcb-shm0-dev \
+            libxcb-xfixes0-dev \
+            libxcb1-dev \
             libxcursor-dev \
+            libxdmcp-dev \
             libxext-dev \
             libxfixes-dev \
             libxi-dev \
             libxinerama-dev \
             libxkbcommon-dev \
-            libxrandr-dev \
-            libxss-dev \
+
             libxml2-dev \
-            libxcb1-dev \
-            libxcb-shm0-dev \
-            libxcb-xfixes0-dev \
+            libxrandr-dev \
+            libxrender-dev \
+            libxss-dev \
+            libxt-dev \
+            libxv-dev \
+            libxxf86vm-dev \
+            llvm-18-dev \
             meson \
+            nasm \
             ninja-build \
+            openjdk-17-jdk \
             pkg-config \
             texinfo \
+            uuid-dev \
             wget \
+            x11proto-dev \
+            xsltproc \
+            xtrans-dev \
             yasm \
+            zlib1g-dev \
             zlib1g-dev
 
       # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
@@ -101,8 +165,8 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # Using an older, more compatible NDK version (r21e) to avoid C compiler strictness issues.
-          packages: 'ndk;21.4.7075529'
+          # Using the NDK version that works on the local WSL setup.
+          packages: 'ndk;25.2.9519653'
 
       # 5. Cache Gradle files to speed up subsequent builds.
       - name: Cache Gradle packages
