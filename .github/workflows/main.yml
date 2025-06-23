@@ -86,7 +86,48 @@ jobs:
 
       # 7. Run the main build command.
       - name: Build Full FFmpeg-Kit for Android
-        run: ./android.sh --full --disable-gnutls
+        run: |
+          chmod +x android.sh
+          ./android.sh \
+            --enable-gpl \
+            --enable-android-media-codec \
+            --enable-android-zlib \
+            --enable-chromaprint \
+            --enable-dav1d \
+            --enable-fontconfig \
+            --enable-freetype \
+            --enable-fribidi \
+            --enable-gmp \
+            --enable-kvazaar \
+            --enable-lame \
+            --enable-libaom \
+            --enable-libass \
+            --enable-libiconv \
+            --enable-libilbc \
+            --enable-libtheora \
+            --enable-libvorbis \
+            --enable-libvpx \
+            --enable-libwebp \
+            --enable-libxml2 \
+            --enable-opencore-amr \
+            --enable-openh264 \
+            --enable-openssl \
+            --enable-opus \
+            --enable-sdl \
+            --enable-shine \
+            --enable-snappy \
+            --enable-soxr \
+            --enable-speex \
+            --enable-srt \
+            --enable-tesseract \
+            --enable-twolame \
+            --enable-vo-amrwbenc \
+            --enable-zimg \
+            --enable-libvidstab \
+            --enable-rubberband \
+            --enable-x264 \
+            --enable-x265 \
+            --enable-xvidcore
 
       # 8. If the build fails, print the entire build log to the console.
       - name: Print build logs on failure
