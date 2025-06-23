@@ -101,8 +101,8 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # NDK version is now specified as part of the packages list
-          packages: 'ndk;25.2.9519653'
+          # Using an older, more compatible NDK version to avoid C compiler strictness issues.
+          packages: 'ndk;23.1.7779620'
 
       # 5. Cache Gradle files to speed up subsequent builds.
       - name: Cache Gradle packages
