@@ -22,22 +22,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Install the system-level build dependencies required by FFmpeg and its libraries.
+      # 2. Install the complete list of system-level build dependencies.
+      #    This list is based on the official FFmpeg Trac wiki guide to ensure all
+      #    external libraries can be compiled successfully.
       - name: Install Build Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
+          sudo apt-get update -qq && sudo apt-get -y install \
             autoconf \
             automake \
             build-essential \
             cmake \
-            curl \
-            git \
+            git-core \
+            libass-dev \
+            libfreetype6-dev \
+            libgnutls28-dev \
+            libmp3lame-dev \
+            libsdl2-dev \
             libtool \
-            nasm \
+            libva-dev \
+            libvdpau-dev \
+            libvorbis-dev \
+            libxcb1-dev \
+            libxcb-shm0-dev \
+            libxcb-xfixes0-dev \
+            meson \
+            ninja-build \
             pkg-config \
             texinfo \
-            yasm
+            wget \
+            yasm \
+            zlib1g-dev \
+            libunistring-dev \
+            libaom-dev \
+            libdav1d-dev \
+            libglib2.0-dev
 
       # 3. Set up JDK 17, which is required for modern Android Gradle Plugin versions.
       - name: Set up JDK 17
@@ -65,11 +83,9 @@ jobs:
           key: ${{ runner.os }}-ffmpeg-sources-${{ hashFiles('**/tools/download-sources.sh') }}
 
       # 6. Run the main build command. This is where your specific command goes.
-      #    We also set the necessary Android environment variables.
       - name: Build Full FFmpeg-Kit for Android
         env:
           # Define environment variables required by the build script.
-          # The Android SDK path will be set automatically by the setup-android action.
           ANDROID_NDK_ROOT: ${{ env.ANDROID_HOME }}/ndk-bundle
         run: |
           echo "Starting FFmpeg-Kit build..."
@@ -85,4 +101,3 @@ jobs:
         with:
           name: ffmpeg-kit-full-android-aars
           path: prebuilt/android-aar/
-
