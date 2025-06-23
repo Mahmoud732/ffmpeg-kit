@@ -36,6 +36,7 @@ jobs:
             git-core \
             gettext \
             groff \
+            gtk-doc-tools \
             libass-dev \
             libfreetype6-dev \
             libgnutls28-dev \
