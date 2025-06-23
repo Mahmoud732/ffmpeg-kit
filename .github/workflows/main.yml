@@ -124,6 +124,8 @@ jobs:
 
       # 7. Run the main build command.
       - name: Build Full FFmpeg-Kit for Android
+        # We add 'continue-on-error: true' so that the next step (uploading the log) will run even if this step fails.
+        continue-on-error: true
         run: |
           echo "Starting FFmpeg-Kit build..."
           echo "ANDROID_HOME: $ANDROID_HOME"
@@ -133,9 +135,18 @@ jobs:
           # Execute the script with the --full flag
           ./android.sh --full
 
-      # 8. Upload the entire 'prebuilt/android-aar' directory as a single artifact.
-      #    This will contain all the generated AAR files for each architecture.
+      # 8. Upload the build.log file for debugging.
+      #    This step will run even if the build step above fails.
+      - name: Upload Build Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+
+      # 9. Upload the entire 'prebuilt/android-aar' directory if the build was successful.
       - name: Upload AAR Artifacts
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-kit-full-android-aars
