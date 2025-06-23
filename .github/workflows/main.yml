@@ -33,6 +33,7 @@ jobs:
             build-essential \
             cmake \
             git-core \
+            gettext \
             libass-dev \
             libfreetype6-dev \
             libgnutls28-dev \
