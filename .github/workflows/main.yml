@@ -36,20 +36,20 @@ jobs:
             libglib2.0-dev libglx-dev libgmp-dev libgnutls28-dev libgraphite2-dev \
             libharfbuzz-dev libibus-1.0-dev libice-dev libicu-dev libidn2-dev \
             libjpeg-dev libltdl-dev libmount-dev libmp3lame-dev libncurses-dev \
-            libobjc-13-dev libogg-dev libopts25-dev libopus-dev libp11-kit-dev \
-            libpciaccess-dev libpcre2-dev libpng-dev libpthread-stubs0-dev \
-            libpulse-dev libsamplerate0-dev libsdl2-dev libselinux1-dev \
-            libsepol-dev libsharpyuv-dev libsm-dev libsndio-dev libsoxr-dev \
-            libssl-dev libstdc++-13-dev libtasn1-6-dev libtool libudev-dev \
-            libunibreak-dev libunistring-dev libva-dev libvdpau-dev libvorbis-dev \
-            libvpx-dev libwayland-dev libwebp-dev libx11-dev libxau-dev \
-            libxcb-render0-dev libxcb-shape0-dev libxcb-shm0-dev \
-            libxcb-xfixes0-dev libxcb1-dev libxcursor-dev libxdmcp-dev \
-            libxext-dev libxfixes-dev libxi-dev libxinerama-dev libxkbcommon-dev \
-            libxml2-dev libxrandr-dev libxrender-dev libxss-dev libxt-dev \
-            libxv-dev libxxf86vm-dev llvm-18-dev meson nasm ninja-build \
-            openjdk-17-jdk pkg-config texinfo uuid-dev wget x11proto-dev \
-            xsltproc xtrans-dev yasm zlib1g-dev
+            nettle-dev libobjc-13-dev libogg-dev libopts25-dev libopus-dev \
+            libp11-kit-dev libpciaccess-dev libpcre2-dev libpng-dev \
+            libpthread-stubs0-dev libpulse-dev libsamplerate0-dev libsdl2-dev \
+            libselinux1-dev libsepol-dev libsharpyuv-dev libsm-dev \
+            libsndio-dev libsoxr-dev libssl-dev libstdc++-13-dev \
+            libtasn1-6-dev libtasn1-bin libtool libudev-dev libunibreak-dev \
+            libunistring-dev libva-dev libvdpau-dev libvorbis-dev libvpx-dev \
+            libwayland-dev libwebp-dev libx11-dev libxau-dev libxcb-render0-dev \
+            libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev \
+            libxcursor-dev libxdmcp-dev libxext-dev libxfixes-dev libxi-dev \
+            libxinerama-dev libxkbcommon-dev libxml2-dev libxrandr-dev \
+            libxrender-dev libxss-dev libxt-dev libxv-dev libxxf86vm-dev \
+            llvm-18-dev meson nasm ninja-build openjdk-17-jdk pkg-config \
+            texinfo uuid-dev wget x11proto-dev xsltproc xtrans-dev yasm zlib1g-dev
 
       # 3. Set up JDK 17, mirroring the official ffmpeg-kit workflow.
       - name: Set up Adopt JDK 17
